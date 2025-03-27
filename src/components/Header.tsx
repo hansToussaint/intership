@@ -9,6 +9,7 @@ import {
   Typography,
   Paper,
   InputBase,
+  useMediaQuery,
 } from "@mui/material";
 import { Favorite, Search } from "@mui/icons-material";
 import { RootState } from "../store";
@@ -20,6 +21,8 @@ const Header: React.FC = () => {
   const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
   const isHome = location.pathname === "/";
+
+  const isSmallView = useMediaQuery(theme.breakpoints.down("sm"));
 
   // Get liked products count from Redux state
   const likedCount = useSelector(
@@ -78,7 +81,11 @@ const Header: React.FC = () => {
         <Typography
           variant="h2"
           onClick={() => navigate("/")}
-          sx={{ cursor: "pointer", mr: 1 }}
+          sx={{
+            cursor: "pointer",
+            mr: 1,
+            fontSize: isSmallView ? "1rem" : "2.2rem",
+          }}
         >
           My Shopping List
         </Typography>
