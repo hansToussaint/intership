@@ -67,7 +67,7 @@ const CreateProduct: React.FC = () => {
     dispatch(createProduct(newProduct));
 
     // Optionally navigate back to the product list
-    navigate("/products?page=1");
+    navigate(`${import.meta.env.BASE_URL}/products?page=1`);
   };
 
   return (

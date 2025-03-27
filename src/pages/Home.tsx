@@ -71,14 +71,14 @@ const Home: React.FC = () => {
           disableRipple
           variant="contained"
           color="primary"
-          onClick={() => navigate("/products")}
+          onClick={() => navigate(`${import.meta.env.BASE_URL}/products`)}
           sx={{ fontSize: "1.4rem" }}
         >
           View products
         </Button>
       </Container>
       <img
-        src="/image.jpg"
+        src={`${import.meta.env.BASE_URL}/image.jpg`}
         alt="Shop Background"
         loading="lazy"
         onLoad={handleImageLoad}

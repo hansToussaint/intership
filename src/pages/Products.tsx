@@ -41,7 +41,7 @@ const Products: React.FC = () => {
           color="primary"
           disableRipple
           sx={{ position: "fixed", bottom: 24, right: 24 }}
-          onClick={() => navigate("/create-product")}
+          onClick={() => navigate(`${import.meta.env.BASE_URL}/create-product`)}
         >
           <Add />
         </Fab>

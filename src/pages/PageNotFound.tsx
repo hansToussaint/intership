@@ -16,7 +16,7 @@ const PageNotFound: React.FC = () => {
         </Typography>
       </Grid2>
 
-      <Link to="/">
+      <Link to={import.meta.env.BASE_URL}>
         <Button
           variant="contained"
           disableRipple
