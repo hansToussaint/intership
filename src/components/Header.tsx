@@ -45,7 +45,9 @@ const Header: React.FC = () => {
     searchParams.set("filter", "liked");
     // If not on /products, navigate there.
     if (!location.pathname.startsWith("/products")) {
-      navigate(`/products?${searchParams.toString()}`);
+      navigate(
+        `${import.meta.env.BASE_URL}/products?${searchParams.toString()}`
+      );
     } else {
       setSearchParams(searchParams);
     }

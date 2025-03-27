@@ -21,7 +21,7 @@ const Home: React.FC = () => {
     >
       <Box
         sx={{
-          backgroundImage: "url(/image.jpg)",
+          backgroundImage: `url(${import.meta.env.BASE_URL}/image.jpg)`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           filter: isImageLoaded ? "none" : "blur(10px)",
