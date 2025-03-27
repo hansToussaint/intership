@@ -71,7 +71,7 @@ const CreateProduct: React.FC = () => {
   };
 
   return (
-    <Container sx={{ mt: 12 }}>
+    <Container sx={{ mt: 12, mb: 5 }}>
       <Header />
 
       <Typography variant="h1" mb={5}>
