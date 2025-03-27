@@ -27,7 +27,6 @@ const CustomToggleButton = styled(ToggleButton)(({ theme }) => ({
   "&.Mui-selected": {
     backgroundColor: theme.palette.primary.dark,
     color: theme.palette.common.white,
-
     "&:hover": {
       backgroundColor: theme.palette.secondary.dark,
     },
@@ -39,6 +38,7 @@ const ProductList: React.FC = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
 
+  // Lire les query params pour search, filter et page
   const initialSearch = searchParams.get("search") || "";
   const initialFilter = (searchParams.get("filter") as "liked" | null) || "all";
   const initialPage = parseInt(searchParams.get("page") || "1", 10);
@@ -50,12 +50,14 @@ const ProductList: React.FC = () => {
   const [filter, setFilter] = useState<"all" | "liked">(initialFilter);
   const [page, setPage] = useState(initialPage);
 
+  // updating local state when params change
   useEffect(() => {
     setSearchTerm(initialSearch);
     setFilter(initialFilter);
-  }, [initialSearch, initialFilter]);
+    setPage(initialPage);
+  }, [initialSearch, initialFilter, initialPage]);
 
-  // Filter & search
+  // Filter
   const filteredProducts = useMemo(() => {
     let filtered = products;
     if (filter === "liked") {
@@ -75,7 +77,7 @@ const ProductList: React.FC = () => {
     page * PRODUCTS_PER_PAGE
   );
 
-  // actions
+  // Actions
   const handleLike = (id: number) => {
     dispatch(toggleLikeProduct(id));
   };
@@ -85,15 +87,14 @@ const ProductList: React.FC = () => {
   };
 
   const handleCardClick = (id: number) => {
-    // navigate(`/products/${id}`);
-    // navigate(`/products/${id}?page=${page}&scroll=${window.scrollY}`);
-
-    // keep the search results also
-    navigate(
-      `/products/${id}?page=${page}&scroll=${
-        window.scrollY
-      }&search=${encodeURIComponent(searchTerm)}&filter=${filter}`
-    );
+    navigate(`/products/${id}`, {
+      state: {
+        page,
+        scroll: window.scrollY,
+        search: searchTerm,
+        filter,
+      },
+    });
   };
 
   const handleFilterChange = (
@@ -103,21 +104,11 @@ const ProductList: React.FC = () => {
     if (newFilter !== null) {
       setFilter(newFilter);
       setPage(1);
-      navigate(
-        `/products?search=${encodeURIComponent(searchTerm)}&filter=${newFilter}`
-      );
     }
   };
 
   const handlePageChange = (_: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
-
-    // Append the page query parameter along with search and filter
-    navigate(
-      `/products?search=${encodeURIComponent(
-        searchTerm
-      )}&filter=${filter}&page=${value}`
-    );
   };
 
   return (

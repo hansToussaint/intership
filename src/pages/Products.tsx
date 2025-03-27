@@ -9,7 +9,6 @@ import { Add } from "@mui/icons-material";
 import Header from "../components/Header";
 
 const Products: React.FC = () => {
-  // Initialize the Redux dispatch
   const dispatch = useDispatch<AppDispatch>();
   const [searchParams] = useSearchParams();
   const scroll = searchParams.get("scroll");
@@ -19,7 +18,7 @@ const Products: React.FC = () => {
     dispatch(fetchProducts());
   }, [dispatch]);
 
-  // Restore the scroll position if previous state contains a scroll value.
+  // Restore the scroll position
   useEffect(() => {
     if (scroll) {
       window.scrollTo(0, parseInt(scroll, 10));
@@ -35,7 +34,6 @@ const Products: React.FC = () => {
 
       <ProductList />
 
-      {/* Floating Action Button for creating a new product */}
       <Tooltip title="Create Product" arrow>
         <Fab
           color="primary"
