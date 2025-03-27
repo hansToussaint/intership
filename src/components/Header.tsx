@@ -19,7 +19,8 @@ const Header: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
-  const isHome = location.pathname === import.meta.env.BASE_URL;
+  const isHome = location.pathname === "/";
+
   // Get liked products count from Redux state
   const likedCount = useSelector(
     (state: RootState) =>
@@ -43,10 +44,8 @@ const Header: React.FC = () => {
     // Set the filter parameter
     searchParams.set("filter", "liked");
     // If not on /products, navigate there.
-    if (!location.pathname.startsWith(`${import.meta.env.BASE_URL}/products`)) {
-      navigate(
-        `${import.meta.env.BASE_URL}/products?${searchParams.toString()}`
-      );
+    if (!location.pathname.startsWith("/products")) {
+      navigate(`/products?${searchParams.toString()}`);
     } else {
       setSearchParams(searchParams);
     }
@@ -78,16 +77,14 @@ const Header: React.FC = () => {
       >
         <Typography
           variant="h2"
-          onClick={() => navigate(import.meta.env.BASE_URL)}
+          onClick={() => navigate("/")}
           sx={{ cursor: "pointer", mr: 1 }}
         >
           My Shopping List
         </Typography>
 
         {/* If on /products, display the search bar; otherwise, add a spacer */}
-        {location.pathname.startsWith(
-          `${import.meta.env.BASE_URL}/products`
-        ) ? (
+        {location.pathname.startsWith("/products") ? (
           <Box sx={{ flexGrow: 1, mx: 2 }}>
             <Paper
               component="form"

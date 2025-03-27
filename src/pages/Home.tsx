@@ -71,7 +71,7 @@ const Home: React.FC = () => {
           disableRipple
           variant="contained"
           color="primary"
-          onClick={() => navigate(`${import.meta.env.BASE_URL}/products`)}
+          onClick={() => navigate("/products")}
           sx={{ fontSize: "1.4rem" }}
         >
           View products

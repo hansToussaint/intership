@@ -90,7 +90,7 @@ const ProductList: React.FC = () => {
 
     // keep the search results also
     navigate(
-      `${import.meta.env.BASE_URL}/products/${id}?page=${page}&scroll=${
+      `/products/${id}?page=${page}&scroll=${
         window.scrollY
       }&search=${encodeURIComponent(searchTerm)}&filter=${filter}`
     );
@@ -104,9 +104,7 @@ const ProductList: React.FC = () => {
       setFilter(newFilter);
       setPage(1);
       navigate(
-        `${import.meta.env.BASE_URL}/products?search=${encodeURIComponent(
-          searchTerm
-        )}&filter=${newFilter}`
+        `/products?search=${encodeURIComponent(searchTerm)}&filter=${newFilter}`
       );
     }
   };
@@ -116,7 +114,7 @@ const ProductList: React.FC = () => {
 
     // Append the page query parameter along with search and filter
     navigate(
-      `${import.meta.env.BASE_URL}/products?search=${encodeURIComponent(
+      `/products?search=${encodeURIComponent(
         searchTerm
       )}&filter=${filter}&page=${value}`
     );
