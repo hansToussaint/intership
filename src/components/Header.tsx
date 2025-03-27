@@ -120,6 +120,7 @@ const Header: React.FC = () => {
         <IconButton disableRipple color="inherit" onClick={handleLikedClick}>
           <Badge
             badgeContent={likedCount}
+            showZero
             sx={{
               "& .MuiBadge-badge": {
                 backgroundColor: theme.palette.secondary.main,
