@@ -24,7 +24,7 @@ const PageNotFound: React.FC = () => {
             fontSize: "1.3rem",
             fontFamily: "inherit",
             textTransform: "none",
-            // color: colorText,
+            // color: ,
             fontWeight: 500,
             borderRadius: "50px",
             padding: "0.8rem 1.9rem",

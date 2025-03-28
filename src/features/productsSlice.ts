@@ -27,16 +27,15 @@ const initialState: ProductState = {
 export const fetchProducts = createAsyncThunk(
   "products/fetch",
   async (): Promise<Product[]> => {
-    // Check if products are already stored in localStorage
     const localProducts = localStorage.getItem("products");
     if (localProducts) {
-      // Return stored products if available
       return JSON.parse(localProducts) as Product[];
     }
-    // Otherwise, fetch from API
+
+    //
     const response = await fetch("https://fakestoreapi.com/products");
     const data: Product[] = await response.json();
-    // Save the fetched data into localStorage for persistence
+
     localStorage.setItem("products", JSON.stringify(data));
     return data;
   }
@@ -61,7 +60,7 @@ const productsSlice = createSlice({
     },
 
     createProduct: (state, action: PayloadAction<Product>) => {
-      // Add the new product to the beginning of the products array
+      // Add to the beginning
       state.products.unshift(action.payload);
       localStorage.setItem("products", JSON.stringify(state.products));
     },

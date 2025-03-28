@@ -17,14 +17,13 @@ const CreateProduct: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
-  // Local state for form fields
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [image, setImage] = useState<string>("");
 
-  // To preview the selected image
+  // preview the selected image
   const [imagePreview, setImagePreview] = useState<string>("");
 
   // Handle file input change for image upload
@@ -35,8 +34,8 @@ const CreateProduct: React.FC = () => {
 
       reader.onloadend = () => {
         const result = reader.result as string;
-        setImage(result); // Save the base64 image string
-        setImagePreview(result); // Display preview
+        setImage(result);
+        setImagePreview(result);
       };
       reader.readAsDataURL(file);
     }
@@ -45,13 +44,11 @@ const CreateProduct: React.FC = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // Check that all fields are filled
     if (!title || !price || !description || !image) {
       alert("Please fill the required fieldss");
       return;
     }
 
-    // Create new product
     const newProduct: Product = {
       id: Date.now(),
       title,
@@ -63,10 +60,8 @@ const CreateProduct: React.FC = () => {
       liked: false,
     };
 
-    // Dispatch the action to add the new product
     dispatch(createProduct(newProduct));
 
-    // Optionally navigate back to the product list
     navigate("/products?page=1");
   };
 

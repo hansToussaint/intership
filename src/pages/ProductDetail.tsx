@@ -17,7 +17,7 @@ const ProductDetail: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Attempt to retrieve navigation state passed from the previous page (page, search, filter, scroll)
+  // retrieve navigation state
   const navState = location.state as {
     page?: number;
     search?: string;
@@ -25,12 +25,10 @@ const ProductDetail: React.FC = () => {
     scroll?: number;
   } | null;
 
-  // Find the product in the Redux store by its ID
   const product = useSelector((state: RootState) =>
     state.products.products.find((p) => p.id === Number(id))
   );
 
-  // Back button function: if navState is available, reconstruct the URL with query parameters to return to the previous state
   const handleBack = () => {
     if (navState && Object.keys(navState).length > 0) {
       const queryParams = new URLSearchParams();
@@ -41,7 +39,6 @@ const ProductDetail: React.FC = () => {
         queryParams.set("scroll", navState.scroll.toString());
       navigate(`/products?${queryParams.toString()}`);
     } else {
-      // If no state data is passed (direct access), simply go back in history
       navigate(-1);
     }
   };
@@ -54,7 +51,6 @@ const ProductDetail: React.FC = () => {
     <Container sx={{ mt: 12 }}>
       <Header />
 
-      {/* Back button to return to the products list */}
       <Button
         disableRipple
         onClick={handleBack}
@@ -66,7 +62,6 @@ const ProductDetail: React.FC = () => {
 
       <Paper elevation={3} sx={{ p: 3 }}>
         <Grid2 container spacing={4}>
-          {/* Product image section */}
           <Grid2 size={{ xs: 12, md: 6 }}>
             <Box
               component="img"
